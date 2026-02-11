@@ -44,6 +44,10 @@ html, body {
     background: linear-gradient(135deg, var(--light-pink), var(--soft-purple));
     color: var(--text-dark);
     overflow: hidden;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    user-select: none;
 }
 
 /* ========== LANDING PAGE ========== */
@@ -172,6 +176,9 @@ html, body {
         -2px -2px 0 rgba(255, 255, 255, 0.5) inset;
     transition: all 0.1s ease;
     text-transform: uppercase;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
 }
 
 .pixel-button:hover {
@@ -401,6 +408,10 @@ body.dark-theme .desktop-background {
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .desktop-icon:hover .icon-img {
@@ -451,6 +462,7 @@ body.dark-theme .desktop-background {
     flex-direction: column;
     animation: window-open 0.3s ease-out;
     z-index: 10;
+    touch-action: none;
 }
 
 body.dark-theme .window {
@@ -484,6 +496,9 @@ body.dark-theme .window {
     user-select: none;
     border-bottom: 2px solid var(--dark-pink);
     font-size: 0.7rem;
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 
 body.dark-theme .window-header {
@@ -1871,15 +1886,28 @@ body.dark-theme .hearts-game-container {
     }
 
     .window {
-        min-width: 250px;
-        min-height: 180px;
+        min-width: 280px;
+        min-height: 200px;
+        max-width: 95vw;
+        max-height: 80vh;
+        position: absolute !important;
+        overflow-y: auto !important;
+    }
+
+    .window-content {
+        overflow-y: auto !important;
+        max-height: calc(80vh - 80px);
     }
 
     .game-board {
         width: 95%;
-        max-width: 100%;
+        max-width: 95vw;
         height: auto;
         max-height: 90vh;
+        position: fixed;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
     }
 
     .memory-game-container {
@@ -1891,20 +1919,41 @@ body.dark-theme .hearts-game-container {
     .desktop-icons {
         grid-template-columns: repeat(2, 50px);
         gap: 15px;
+        top: 5px;
+        left: 5px;
     }
 
     .window {
-        min-width: 200px;
+        min-width: 200px !important;
+        min-height: 150px !important;
+        max-width: 90vw !important;
+        max-height: 75vh !important;
         font-size: 0.5rem;
+        left: 5vw !important;
+        top: 15vh !important;
     }
 
     .window-content {
         font-size: 0.55rem;
+        max-height: calc(75vh - 70px) !important;
+        overflow-y: auto !important;
+    }
+
+    .window-header {
+        font-size: 0.6rem;
+        padding: 0.3rem;
     }
 
     .taskbar {
         height: 40px;
         font-size: 0.5rem;
+    }
+
+    .game-board {
+        width: 90vw !important;
+        max-width: 90vw !important;
+        height: 75vh !important;
+        max-height: 75vh !important;
     }
 }
 

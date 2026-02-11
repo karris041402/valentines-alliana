@@ -355,32 +355,79 @@ class WindowManager {
             playSound('click');
         });
 
-        // Dragging
+        // Dragging - Support both mouse and touch events
         let isDragging = false;
         let currentX;
         let currentY;
         let initialX;
         let initialY;
 
-        header.addEventListener('mousedown', (e) => {
+        // Function to start dragging
+        const startDrag = (clientX, clientY) => {
             isDragging = true;
-            initialX = e.clientX - windowEl.offsetLeft;
-            initialY = e.clientY - windowEl.offsetTop;
+            initialX = clientX - windowEl.offsetLeft;
+            initialY = clientY - windowEl.offsetTop;
             windowEl.style.zIndex = ++this.zIndex;
-        });
+            header.style.cursor = 'grabbing';
+        };
 
-        document.addEventListener('mousemove', (e) => {
+        // Function to move window
+        const moveDrag = (clientX, clientY) => {
             if (isDragging) {
-                currentX = e.clientX - initialX;
-                currentY = e.clientY - initialY;
+                currentX = clientX - initialX;
+                currentY = clientY - initialY;
+                
+                // Constrain to viewport
+                const desktop = document.getElementById('desktop');
+                if (desktop) {
+                    const maxX = desktop.offsetWidth - windowEl.offsetWidth;
+                    const maxY = desktop.offsetHeight - windowEl.offsetHeight;
+                    
+                    currentX = Math.max(0, Math.min(currentX, maxX));
+                    currentY = Math.max(0, Math.min(currentY, maxY));
+                }
+                
                 windowEl.style.left = currentX + 'px';
                 windowEl.style.top = currentY + 'px';
             }
+        };
+
+        // Function to end dragging
+        const endDrag = () => {
+            isDragging = false;
+            header.style.cursor = 'move';
+        };
+
+        // Mouse events
+        header.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            startDrag(e.clientX, e.clientY);
         });
 
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
+        document.addEventListener('mousemove', (e) => {
+            moveDrag(e.clientX, e.clientY);
         });
+
+        document.addEventListener('mouseup', endDrag);
+
+        // Touch events for mobile
+        header.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (e.touches.length > 0) {
+                startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                e.preventDefault();
+                if (e.touches.length > 0) {
+                    moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', endDrag);
     }
 
     /**
