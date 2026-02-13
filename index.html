@@ -1,299 +1,354 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World System.exe</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Landing Page -->
-    <div id="landingPage" class="landing-page">
-        <div class="landing-container">
-            <div class="pixel-stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-            </div>
-            
-            <h1 class="pixel-title">
-                <span class="glitch" data-text="Welcome to">Welcome to</span><br>
-                <span class="glitch" data-text="Digital World">Digital World</span>
-            </h1>
-            
-            <p class="landing-description">
-                I made this little digital world — built with admiration,<br>
-                and a little bit of 90s magic.<br>
-                Ready to explore it together? 💗
-            </p>
-            
-            <button id="playBtn" class="pixel-button play-button">
-                🎮 PLAY TOGETHER
-            </button>
-            
-            <div class="floating-hearts">
-                <div class="heart">❤️</div>
-                <div class="heart">💗</div>
-                <div class="heart">💕</div>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space System - Outer Space Presentation</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Landing Page with Space Theme -->
+    <div id="landingPage" class="landing-page space-landing">
+      <div class="space-background">
+        <div class="stars-container"></div>
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+      </div>
+
+      <div class="landing-container">
+        <div class="pixel-stars">
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
         </div>
+
+        <img
+          src="cat.gif"
+          alt="Cat"
+          class="cat-gif"
+          style="
+            width: 120px;
+            margin-bottom: 1rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        />
+        <h1 class="pixel-title space-title">
+          <span class="glitch" data-text="HELLO">HELLO</span>
+          <span class="glitch" data-text="myWORLD">myWORLD</span>
+        </h1>
+
+        <p class="landing-description">
+          I made this with sincere love and admiration, I love youu 💗
+        </p>
+
+        <button id="playBtn" class="pixel-button play-button space-button">
+          Enter the World
+        </button>
+
+        <div class="floating-circles"></div>
+        <div class="floating-hearts">
+          <div class="heart">❤️</div>
+          <div class="heart">💗</div>
+          <div class="heart">💕</div>
+        </div>
+      </div>
     </div>
 
     <!-- Loading Screen -->
-    <div id="loadingScreen" class="loading-screen hidden">
-        <div class="loading-container">
-            <p class="loading-text">Loading Our World...</p>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-                <div class="f1-track">
-                    <div class="f1-car">🏎️</div>
-                </div>
-            </div>
+    <div id="loadingScreen" class="loading-screen hidden space-loading">
+      <div class="loading-container advanced-loading">
+        <div class="loading-glow"></div>
+        <div class="loading-planet">
+          <div class="planet"></div>
+          <div class="orbit">
+            <div class="satellite"></div>
+          </div>
         </div>
+        <p class="loading-text">Loading Our World...</p>
+        <div class="loading-bar">
+          <div class="loading-progress"></div>
+          <div class="f1-track">
+            <div class="f1-car">🏎️</div>
+          </div>
+        </div>
+        <div class="loading-tips">Tip: You are loved. 🌟</div>
+      </div>
     </div>
 
     <!-- Main Desktop System -->
-    <div id="desktopSystem" class="desktop-system hidden">
-        <!-- Desktop -->
-        <div id="desktop" class="desktop">
-            <!-- Background Pattern -->
-            <div class="desktop-background"></div>
-            
-            <!-- Desktop Icons - removed for Hot Wheels redesign, tires only -->
-            <div class="desktop-icons hidden">
+    <div id="desktopSystem" class="desktop-system hidden space-desktop">
+      <!-- Letter Modal Overlay -->
+      <div class="letter-modal-overlay hidden">
+        <div class="letter-modal">
+          <div class="letter-paper-outer" style="width: 100%">
+            <div class="letter-paper">
+              <div class="letter-ribbon"></div>
+              <div class="letter-content">
+                <p class="letter-text"></p>
+              </div>
             </div>
+          </div>
+          <div class="letter-actions">
+            <button class="reply-btn">Reply 💌</button>
+            <button class="close-letter-btn">Close ✕</button>
+          </div>
+        </div>
+      </div>
 
-            <!-- Windows Container -->
-            <div id="windowsContainer" class="windows-container"></div>
-
-            <!-- Hot Wheels UI: left message tab and right tires -->
-            <div id="hotWheelsUI" class="hotwheels-ui">
-                <div id="messageTab" class="message-tab hidden">
-                    <button id="tabClose" class="tab-close">←</button>
-                    <div id="messageContent" class="message-content"></div>
-                </div>
-
-                <div id="tiresPanel" class="tires-panel">
-                    <h3 class="tires-title">Files of Surprise</h3>
-                    <div class="tires-row">
-                        <div class="tire" data-tire="1">Folder1</div>
-                        <div class="tire" data-tire="2">Folder2</div>
-                        <div class="tire" data-tire="3">Folder3</div>
-                        <div class="tire" data-tire="4">Folder4</div>
-                    </div>
-                    <p class="tires-caption">Open it one at a time :&gt;</p>
-                </div>
-            </div>
-
-            <!-- Particle Container for effects -->
-            <div id="particleContainer" class="particle-container"></div>
+      <!-- Desktop -->
+      <div id="desktop" class="desktop space-desktop-bg">
+        <!-- Background Pattern with Space Theme -->
+        <div class="desktop-background space-bg">
+          <div class="starfield"></div>
+          <div class="space-grid"></div>
         </div>
 
-        <!-- Taskbar -->
-        <div class="taskbar">
-            <div class="taskbar-left">
-                <button id="startBtn" class="start-button">❤️ Start</button>
-                <div class="taskbar-apps"></div>
+        <!-- Desktop Icons -->
+        <div class="desktop-icons hidden"></div>
+
+        <!-- Windows Container -->
+        <div id="windowsContainer" class="windows-container"></div>
+
+        <!-- Hot Wheels UI: left message tab and right tires -->
+        <div id="hotWheelsUI" class="hotwheels-ui">
+          <div id="messageTab" class="message-tab hidden">
+            <div id="messageContent" class="message-content"></div>
+          </div>
+
+          <div id="tiresPanel" class="tires-panel space-tires">
+            <h3 class="tires-title">⭐ Files of Surprise</h3>
+            <div class="tires-row">
+              <div class="tire space-tire" data-tire="1">📁 Folder1</div>
+              <div class="tire space-tire" data-tire="2">💌 Folder2</div>
+              <div class="tire space-tire" data-tire="3">🌹 Folder3</div>
+              <div class="tire space-tire" data-tire="4">🎮 Folder4</div>
             </div>
-            <div class="taskbar-center">
-                <div id="clockDisplay" class="clock">00:00:00</div>
-            </div>
-            <div class="taskbar-right">
-                <button id="soundToggle" class="taskbar-icon" title="Sound">🔊</button>
-                <button id="themeToggle" class="taskbar-icon" title="Theme">🌙</button>
-                <button id="glitchEffect" class="taskbar-icon" title="Glitch">✨</button>
-            </div>
+            <p class="tires-caption">Open it one at a time :&gt;</p>
+          </div>
         </div>
+
+        <!-- Particle Container for effects -->
+        <div id="particleContainer" class="particle-container"></div>
+      </div>
+
+      <!-- Taskbar -->
+      <div class="taskbar space-taskbar">
+        <div class="taskbar-left">
+          <button id="startBtn" class="start-button">❤️ Start</button>
+          <div class="taskbar-apps"></div>
+        </div>
+        <div class="taskbar-center">
+          <div id="clockDisplay" class="clock">00:00:00</div>
+        </div>
+        <div class="taskbar-right">
+          <button id="soundToggle" class="taskbar-icon" title="Sound">
+            🔊
+          </button>
+          <button id="themeToggle" class="taskbar-icon" title="Theme">
+            🌙
+          </button>
+          <button id="glitchEffect" class="taskbar-icon" title="Glitch">
+            ✨
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Window Templates -->
     <template id="windowTemplate">
-        <div class="window" data-window-type="">
-            <div class="window-header">
-                <span class="window-title"></span>
-                <div class="window-buttons">
-                    <button class="window-btn minimize-btn">_</button>
-                    <button class="window-btn maximize-btn">□</button>
-                    <button class="window-btn close-btn">✕</button>
-                </div>
-            </div>
-            <div class="window-content"></div>
+      <div class="window space-window" data-window-type="">
+        <div class="window-header space-header">
+          <span class="window-title"></span>
+          <div class="window-buttons">
+            <button class="window-btn minimize-btn">_</button>
+            <button class="window-btn maximize-btn">□</button>
+            <button class="window-btn close-btn">✕</button>
+          </div>
         </div>
+        <div class="window-content"></div>
+      </div>
     </template>
 
     <!-- Memories Window Content Template -->
     <template id="memoriesTemplate">
-        <div class="memories-content">
-            <div class="gallery-controls">
-                <button class="gallery-btn prev-btn">◄ Previous</button>
-                <span class="photo-counter">1 / 6</span>
-                <button class="gallery-btn next-btn">Next ►</button>
-            </div>
-            <div class="memory-display">
-                <div class="memory-frame polaroid">
-                    <img src="" alt="Memory" class="memory-image">
-                </div>
-                <div class="memory-info">
-                    <p class="memory-date"></p>
-                    <p class="memory-description"></p>
-                    <p class="memory-note"></p>
-                </div>
-            </div>
-            <div class="gallery-modes">
-                <button class="mode-btn slideshow-btn">▶ Slideshow</button>
-                <button class="mode-btn thumbnail-btn">📋 Thumbnails</button>
-            </div>
-            <div class="thumbnails-grid hidden"></div>
+      <div class="memories-content">
+        <div class="slideshow-container">
+          <div class="slideshow-image-wrapper">
+            <img src="" alt="Memory" class="slideshow-image" />
+          </div>
+          <div class="slideshow-controls">
+            <button class="slideshow-btn prev-slide">◄</button>
+            <button class="slideshow-btn play-pause-slide">⏸</button>
+            <button class="slideshow-btn next-slide">►</button>
+          </div>
+          <div class="slideshow-counter">1 / 20</div>
         </div>
+      </div>
     </template>
 
     <!-- Playlist Window Content Template -->
     <template id="playlistTemplate">
-        <div class="playlist-content">
-            <div class="player-display">
-                <div class="now-playing">Now Playing</div>
-                <div class="song-title">Nothing Yet</div>
-                <div class="equalizer">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-            <div class="progress-container">
-                <span class="current-time">0:00</span>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                    <div class="progress-handle"></div>
-                </div>
-                <span class="duration-time">0:00</span>
-            </div>
-            <div class="controls">
-                <button class="control-btn play-pause-btn">▶</button>
-                <button class="control-btn prev-track-btn">⏮</button>
-                <button class="control-btn next-track-btn">⏭</button>
-                <div class="volume-control">
-                    <span>🔊</span>
-                    <input type="range" class="volume-slider" min="0" max="100" value="70">
-                </div>
-            </div>
-            <div class="playlist-list">
-                <div class="playlist-header">Songs that made me think of u</div>
-                <div class="songs-container"></div>
-            </div>
+      <div class="playlist-content">
+        <div class="player-display">
+          <div class="now-playing">Now Playing</div>
+          <div class="music-disc-outer">
+            <div class="music-disc"></div>
+          </div>
+          <div class="song-title" style="text-align: center">Nothing Yet</div>
+          <div class="equalizer">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
         </div>
+        <div
+          class="progress-container"
+          style="display: flex; justify-content: center; margin-top: 14px"
+        >
+          <span class="current-time">0:00</span>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+            <div class="progress-handle"></div>
+          </div>
+          <p style="margin: 0 5px">-</p>
+          <span class="duration-time">0:00</span>
+        </div>
+        <div class="controls">
+          <button class="control-btn play-pause-btn">▶</button>
+          <button class="control-btn prev-track-btn">⏮</button>
+          <button class="control-btn next-track-btn">⏭</button>
+          <div class="volume-control">
+            <span>🔊</span>
+            <input
+              type="range"
+              class="volume-slider"
+              min="0"
+              max="100"
+              value="70"
+            />
+          </div>
+        </div>
+        <div class="playlist-list">
+          <div
+            class="playlist-header"
+            style="
+              margin-top: 15px;
+              margin-bottom: 10px;
+              font-size: 0.9rem;
+              color: #ff1493;
+              font-weight: bold;
+            "
+          >
+            Songs that made me think of u
+          </div>
+          <div class="songs-container"></div>
+        </div>
+      </div>
     </template>
 
     <!-- Love Letters Window Content Template -->
     <template id="lettersTemplate">
-        <div class="letters-content">
-            <div class="envelopes-container"></div>
-            <div class="letter-display hidden">
-                <div class="letter-content">
-                    <p class="letter-text"></p>
-                </div>
-                <div class="letter-reply">
-                    <button class="reply-btn">Reply 💌</button>
-                </div>
-            </div>
-        </div>
+      <div class="letters-content">
+        <!-- Content moved to main body for global access -->
+      </div>
     </template>
 
     <!-- Mini Games Window Content Template -->
     <template id="gamesTemplate">
-        <div class="games-menu">
-            <div class="game-selector">
-                <button class="game-card" data-game="hearts">
-                    <span class="game-icon">🍓</span>
-                    <span class="game-name">Catch the Strawberries</span>
-                </button>
-                <button class="game-card" data-game="memory">
-                    <span class="game-icon">🧩</span>
-                    <span class="game-name">Memory Match</span>
-                </button>
-                <button class="game-card" data-game="wordle">
-                    <span class="game-icon">🔤</span>
-                    <span class="game-name">Secret Word</span>
-                </button>
-            </div>
+      <div class="games-menu-advanced">
+        <div class="games-welcome">
+          <h2 class="games-title-pixel">ARCADE CENTER</h2>
+          <p class="games-subtitle">Select a game to play!</p>
         </div>
-    </template>
-
-    <!-- Timeline Window Content Template -->
-    <template id="timelineTemplate">
-        <div class="timeline-content">
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-                <div class="timeline-events"></div>
+        <div class="game-selector-grid">
+          <button class="game-card-advanced" data-game="hearts">
+            <div class="game-card-inner">
+              <span class="game-icon-large">🍓</span>
+              <span class="game-name-pixel">Strawberry Catch</span>
+              <span class="game-desc">Catch 14 berries to win!</span>
             </div>
-            <div class="timeline-detail hidden">
-                <button class="back-btn">← Back</button>
-                <div class="detail-content">
-                    <img src="" alt="milestone" class="detail-image">
-                    <h3 class="detail-title"></h3>
-                    <p class="detail-story"></p>
-                </div>
+          </button>
+          <button class="game-card-advanced" data-game="memory">
+            <div class="game-card-inner">
+              <span class="game-icon-large">🧩</span>
+              <span class="game-name-pixel">Memory Match</span>
+              <span class="game-desc">Find all matching pairs!</span>
             </div>
+          </button>
+          <button class="game-card-advanced" data-game="wordle">
+            <div class="game-card-inner">
+              <span class="game-icon-large">🔤</span>
+              <span class="game-name-pixel">Secret Word</span>
+              <span class="game-desc">Guess the hidden word!</span>
+            </div>
+          </button>
         </div>
+      </div>
     </template>
 
     <!-- Secret Folder Window Content Template -->
     <template id="secretTemplate">
-        <div class="secret-content">
-            <div class="secret-lock hidden"></div>
-            <div class="secret-input-container">
-                <p class="secret-prompt">🔐 Enter the password to unlock:</p>
-                <div class="hint-container">
-                    <span class="hint-label">Hint:</span>
-                    <span class="hint-text">Our special number...</span>
-                </div>
-                <input type="password" class="secret-input" placeholder="Password">
-                <button class="secret-submit-btn">Unlock 🔓</button>
-                <p class="secret-error hidden"></p>
-            </div>
-            <div class="secret-message hidden">
-                <div class="secret-revealed">
-                    <p class="revealed-text"></p>
-                    <button class="valentine-prompt-btn">Answer 💕</button>
-                </div>
-            </div>
+      <div class="secret-content">
+        <div class="secret-lock hidden"></div>
+        <div class="secret-input-container">
+          <p class="secret-prompt">🔐 Enter the password to unlock:</p>
+          <div class="hint-container">
+            <span class="hint-label">Hint:</span>
+            <span class="hint-text">Our special number...</span>
+          </div>
+          <input type="password" class="secret-input" placeholder="Password" />
+          <button class="secret-submit-btn">Unlock 🔓</button>
+          <p class="secret-error hidden"></p>
         </div>
+        <div class="secret-message hidden">
+          <div class="secret-revealed">
+            <p class="revealed-text"></p>
+            <button class="valentine-prompt-btn">Answer 💕</button>
+          </div>
+        </div>
+      </div>
     </template>
 
     <!-- Game Boards -->
-    <div id="gameBoard-hearts" class="game-board hidden">
-        <div class="game-header">🍓 Catch the Strawberries</div>
-        <div class="game-stats">
-            <span>Score: <span class="score">0</span></span>
-            <span>Time: <span class="timer">30</span>s</span>
-        </div>
-        <div class="hearts-game-container"></div>
-        <button class="game-back-btn">← Back to Games</button>
+    <div id="gameBoard-hearts" class="game-board hidden space-game-board">
+      <div class="game-header">🍓 Catch the Strawberries</div>
+      <div class="game-stats">
+        <span>Score: <span class="score">0</span></span>
+        <span>Time: <span class="timer">30</span>s</span>
+      </div>
+      <div class="hearts-game-container"></div>
+      <button class="game-back-btn">← Back to Games</button>
     </div>
 
-    <div id="gameBoard-memory" class="game-board hidden">
-        <div class="game-header">🧩 Memory Match</div>
-        <div class="game-stats">
-            <span>Matches: <span class="matches">0</span> / 6</span>
-        </div>
-        <div class="memory-game-container"></div>
-        <button class="game-back-btn">← Back to Games</button>
+    <div id="gameBoard-memory" class="game-board hidden space-game-board">
+      <div class="game-header">🧩 Memory Match</div>
+      <div class="game-stats">
+        <span>Matches: <span class="matches">0</span> / 6</span>
+      </div>
+      <div class="memory-game-container"></div>
+      <button class="game-back-btn">← Back to Games</button>
     </div>
 
-    <div id="gameBoard-wordle" class="game-board hidden">
-        <div class="game-header">🔤 Secret Word</div>
-        <div class="wordle-container">
-            <p class="wordle-instruction">Guess the secret — or click Give Up</p>
-            <div class="wordle-actions">
-                <button id="giveUpBtn" class="pixel-button">Give Up</button>
-            </div>
-            <div id="wordleMessage" class="wordle-message hidden"></div>
+    <div id="gameBoard-wordle" class="game-board hidden space-game-board">
+      <div class="game-header">🔤 Secret Word</div>
+      <div class="wordle-container">
+        <p class="wordle-instruction">Guess the secret — or click Give Up</p>
+        <div class="wordle-actions">
+          <button id="giveUpBtn" class="pixel-button">Give Up</button>
         </div>
-        <button class="game-back-btn">← Back to Games</button>
+        <div id="wordleMessage" class="wordle-message hidden"></div>
+      </div>
+      <button class="game-back-btn">← Back to Games</button>
     </div>
 
     <!-- Easter Egg Heart -->
@@ -301,32 +356,50 @@
 
     <!-- Achievement Popup -->
     <div id="achievementPopup" class="achievement-popup hidden">
-        <div class="achievement-content">
-            <span class="achievement-icon">🏆</span>
-            <p class="achievement-text"></p>
-        </div>
+      <div class="achievement-content">
+        <span class="achievement-icon">🏆</span>
+        <p class="achievement-text"></p>
+      </div>
     </div>
 
     <!-- Final Surprise Screen -->
-    <div id="finalSurprise" class="final-surprise hidden">
-        <div class="surprise-container">
-            <div class="surprise-content">
-                <h2 class="surprise-title">System Update Complete 💕</h2>
-                <p class="surprise-message">You are officially my Valentine.</p>
-                <div class="fireworks-container" id="fireworksContainer"></div>
-                <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
-                    <button class="replay-btn">Replay World</button>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScxL03PxUIEWkUxgPwT9LnfX97bUHF-7pIlP46smozjLpk82w/viewform?usp=header" target="_blank" class="replay-btn" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Secret Button</a>
-                </div>
-            </div>
+    <div id="finalSurprise" class="final-surprise hidden space-surprise">
+      <div class="surprise-container">
+        <div class="surprise-content">
+          <h2 class="surprise-title">System Update Complete 💕</h2>
+          <p class="surprise-message">You are officially my Valentine.</p>
+          <div class="fireworks-container" id="fireworksContainer"></div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 15px;
+              align-items: center;
+            "
+          >
+            <button class="replay-btn">Replay World</button>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfLqJyNcOTFiEBkuIAcLZCTfOGzGH6ju8OjlG9Bv7y6V8JZTQ/viewform?usp=publish-editor"
+              target="_blank"
+              class="replay-btn"
+              style="
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+              >Secret Button</a
+            >
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Audio Element -->
     <audio id="bgMusic" preload="auto" loop>
-        <source src="assets/bgmusic.mp3" type="audio/mpeg">
+      <source src="assets/bgmusic.mp3" type="audio/mpeg" />
     </audio>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
