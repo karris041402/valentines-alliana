@@ -124,8 +124,49 @@
             <div id="messageContent" class="message-content"></div>
           </div>
 
-          <div id="tiresPanel" class="tires-panel space-tires">
-            <h3 class="tires-title">⭐ Files of Surprise</h3>
+          <!-- Files of Surprise Folder Icon and Container -->
+          <div id="filesSurpriseFolder" class="files-surprise-folder">
+            <button
+              id="openFilesSurprise"
+              class="folder-icon-btn"
+              title="Open Files of Surprise"
+            >
+              <span class="folder-emoji">📁</span>
+            </button>
+          </div>
+          <div
+            id="tiresPanel"
+            class="tires-panel space-tires"
+            style="display: none"
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <h3 class="tires-title" style="margin-bottom: 10px">
+                ⭐ Files of Surprise
+              </h3>
+              <button
+                id="minimizeFilesSurprise"
+                class="minimize-files-btn"
+                title="Minimize"
+                style="
+                  font-size: 1.5rem;
+                  position: absolute;
+                  right: 10px;
+                  top: -3px;
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  color: #ff69b4;
+                "
+              >
+                -
+              </button>
+            </div>
             <div class="tires-row">
               <div class="tire space-tire" data-tire="1">📁 Folder1</div>
               <div class="tire space-tire" data-tire="2">💌 Folder2</div>

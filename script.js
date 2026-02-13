@@ -745,6 +745,22 @@ class LoveSystem {
     this.setupTires();
     this.setupTaskbar();
     this.setupHotWheels();
+
+    // Files of Surprise folder icon toggle logic
+    const folderBtn = document.getElementById("openFilesSurprise");
+    const tiresPanel = document.getElementById("tiresPanel");
+    const minimizeBtn = document.getElementById("minimizeFilesSurprise");
+    const folderIconDiv = document.getElementById("filesSurpriseFolder");
+    if (folderBtn && tiresPanel && minimizeBtn && folderIconDiv) {
+      folderBtn.onclick = () => {
+        tiresPanel.style.display = "";
+        folderIconDiv.style.display = "none";
+      };
+      minimizeBtn.onclick = () => {
+        tiresPanel.style.display = "none";
+        folderIconDiv.style.display = "flex";
+      };
+    }
   }
 
   setupTaskbar() {
