@@ -293,6 +293,8 @@ class WindowManager {
   setupWindowControls(windowEl) {
     const closeBtn = windowEl.querySelector(".close-btn");
     const header = windowEl.querySelector(".window-header");
+    const resizeHandle = windowEl.querySelector(".window-resize-handle");
+    const content = windowEl.querySelector(".window-content");
 
     closeBtn.onclick = () => {
       // Cleanup audio if it's a playlist window
@@ -311,24 +313,30 @@ class WindowManager {
       playSound("close");
     };
 
+    // Drag logic
     let isDragging = false;
     let initialX, initialY;
-
+    let currentScale = 1;
     const startDrag = (e) => {
+      // Keep scale during drag
+      if (windowEl.style.transform) {
+        const match = windowEl.style.transform.match(/scale\(([^)]+)\)/);
+        if (match) currentScale = parseFloat(match[1]);
+      } else {
+        currentScale = 1;
+      }
       const clientX = e.type.includes("touch")
         ? e.touches[0].clientX
         : e.clientX;
       const clientY = e.type.includes("touch")
         ? e.touches[0].clientY
         : e.clientY;
-
       isDragging = true;
       initialX = clientX - windowEl.offsetLeft;
       initialY = clientY - windowEl.offsetTop;
       windowEl.style.zIndex = ++this.zIndexBase;
       header.style.cursor = "grabbing";
     };
-
     const moveDrag = (e) => {
       if (!isDragging) return;
       const clientX = e.type.includes("touch")
@@ -337,30 +345,33 @@ class WindowManager {
       const clientY = e.type.includes("touch")
         ? e.touches[0].clientY
         : e.clientY;
-
       let currentX = clientX - initialX;
       let currentY = clientY - initialY;
-
       const desktop = document.getElementById("desktop");
       const maxX = desktop.offsetWidth - windowEl.offsetWidth;
       const maxY = desktop.offsetHeight - windowEl.offsetHeight;
-
       currentX = Math.max(0, Math.min(currentX, maxX));
       currentY = Math.max(0, Math.min(currentY, maxY));
-
       windowEl.style.left = currentX + "px";
       windowEl.style.top = currentY + "px";
+      // Keep scale during drag
+      if (currentScale !== 1) {
+        windowEl.style.transform = `scale(${currentScale})`;
+        windowEl.style.transformOrigin = "top left";
+      }
     };
-
     const endDrag = () => {
       isDragging = false;
       header.style.cursor = "move";
+      // Keep scale after drag
+      if (currentScale !== 1) {
+        windowEl.style.transform = `scale(${currentScale})`;
+        windowEl.style.transformOrigin = "top left";
+      }
     };
-
     header.onmousedown = startDrag;
     window.onmousemove = moveDrag;
     window.onmouseup = endDrag;
-
     header.ontouchstart = startDrag;
     window.ontouchmove = (e) => {
       if (isDragging) {
@@ -369,9 +380,56 @@ class WindowManager {
       }
     };
     window.ontouchend = endDrag;
-
     windowEl.onmousedown = () => {
       windowEl.style.zIndex = ++this.zIndexBase;
+    };
+
+    // Resize logic
+    let isResizing = false;
+    let startW, startH, startX, startY;
+    let aspectRatio = windowEl.offsetWidth / windowEl.offsetHeight;
+    resizeHandle.onmousedown = (e) => {
+      e.preventDefault();
+      isResizing = true;
+      windowEl.classList.add("resizing");
+      startW = windowEl.offsetWidth;
+      startH = windowEl.offsetHeight;
+      startX = e.clientX;
+      startY = e.clientY;
+      aspectRatio = startW / startH;
+      let baseW = startW;
+      let baseH = startH;
+      let baseLeft = windowEl.offsetLeft;
+      let baseTop = windowEl.offsetTop;
+      // Get last scale
+      let previewScale = 1;
+      const match = windowEl.style.transform.match(/scale\(([^)]+)\)/);
+      if (match) previewScale = parseFloat(match[1]);
+      document.onmousemove = (ev) => {
+        if (!isResizing) return;
+        let dx = ev.clientX - startX;
+        // Make scale follow cursor position
+        let newScale = Math.max(0.4, (baseW + dx) / baseW);
+        windowEl.style.transform = `scale(${newScale})`;
+        windowEl.style.transformOrigin = "top left";
+        windowEl.style.width = baseW + "px";
+        windowEl.style.height = baseH + "px";
+        windowEl.style.left = baseLeft + "px";
+        windowEl.style.top = baseTop + "px";
+        previewScale = newScale;
+      };
+      document.onmouseup = (ev) => {
+        isResizing = false;
+        windowEl.classList.remove("resizing");
+        windowEl.style.transform = `scale(${previewScale})`;
+        windowEl.style.transformOrigin = "top left";
+        windowEl.style.width = baseW + "px";
+        windowEl.style.height = baseH + "px";
+        windowEl.style.minWidth = "120px";
+        windowEl.style.minHeight = "80px";
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
     };
   }
 }
@@ -861,6 +919,7 @@ class LoveSystem {
     const wrapper = document.createElement("div");
     wrapper.appendChild(content);
 
+    // Use WindowManager's createWindow which already sets up drag/resize
     const win = this.windowManager.createWindow(
       "playlist",
       "🎵 Songs for you",
@@ -870,28 +929,8 @@ class LoveSystem {
   }
 
   setupPlayer(win) {
-    // Make modal draggable
+    // Drag/resize already handled by WindowManager
     const windowEl = win.closest(".window");
-    const header = windowEl.querySelector(".window-header");
-    let isDragging = false,
-      offsetX = 0,
-      offsetY = 0;
-    header.style.cursor = "grab";
-    header.onmousedown = (e) => {
-      isDragging = true;
-      offsetX = e.clientX - windowEl.offsetLeft;
-      offsetY = e.clientY - windowEl.offsetTop;
-      header.style.cursor = "grabbing";
-    };
-    document.onmousemove = (e) => {
-      if (!isDragging) return;
-      windowEl.style.left = e.clientX - offsetX + "px";
-      windowEl.style.top = e.clientY - offsetY + "px";
-    };
-    document.onmouseup = () => {
-      isDragging = false;
-      header.style.cursor = "grab";
-    };
 
     // Minimize functionality
     const minimizeBtn = windowEl.querySelector(".minimize-btn");
